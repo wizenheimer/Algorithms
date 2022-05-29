@@ -4,5 +4,10 @@
 			"path": ".."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"numeric": "cpp",
+			"cmath": "cpp"
+		}
+	}
 }
