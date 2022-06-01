@@ -1,5 +1,6 @@
 # Prerequisites
 *.d
+*.prob
 
 # Compiled Object files
 *.slo
@@ -30,3 +31,4 @@
 *.exe
 *.out
 *.app
+.cph/.Chef_and_Brain_Speed.cpp_0e58ec10c53cfdcd2eb683077609a6ba.prob
