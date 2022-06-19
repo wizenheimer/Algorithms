@@ -1,38 +1,22 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        
-        int MaxRed = 0, MaxBlue = 0, MaxWhite = 0;
-        
-        for(int i = 0; i < nums.size(); i++)
+//         using Dutch National FLag Algorithm
+        int low = 0, high = nums.size() - 1, mid = 0;
+        while(mid <= high)
         {
-            switch(nums[i])
+            switch(nums[mid])
             {
-                case 0:
-                    MaxRed += 1;
+                case 0 :
+                    swap(nums[low++],nums[mid++]);
                     break;
-                case 1:
-                    MaxBlue += 1;
+                case 1 :
+                    mid++;
                     break;
-                case 2:
-                    MaxWhite += 1;
+                case 2 :
+                    swap(nums[mid],nums[high--]);                  
                     break;
             }
         }
-        
-        MaxBlue += MaxRed;
-        MaxWhite += MaxBlue;
-        
-        for(int i = 0; i < nums.size(); i++)
-        {
-            if(i < MaxRed)
-                nums[i] = 0;
-            else if(i < MaxBlue)
-                nums[i] = 1;
-            else if(i < MaxWhite)
-                nums[i] = 2;                   
-        }
-        
-        
     }
 };
