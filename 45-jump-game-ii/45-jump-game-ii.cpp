@@ -5,7 +5,7 @@ public:
         if(nums.size() <= 1)
             return 0;
         // keep the count of the largest ladder we have
-        int ladder = nums[0];
+        int ladder = 0;
         // keep the count of number of stairs on each ladder
         int stairs = nums[0];
         int result = 1;
