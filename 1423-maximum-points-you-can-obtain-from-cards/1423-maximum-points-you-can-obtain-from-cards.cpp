@@ -1,33 +1,28 @@
 class Solution {
 public:
-    int maxScore(vector<int>& cardPoints, int k) {
+    int maxScore(vector<int>& arr, int k) {
+        int n = arr.size();
+        vector<int> frontSum(n+1, 0), rearSum(n+1, 0);
+        
         int sum = 0;
-        int n = cardPoints.size();
-        
-        vector<int> cummulativeSumFromFront(n+1, 0);
-        vector<int> cummulativeSumFromBehind(n+1, 0);
+        for(int i = 0; i < n; i++) {
+            sum += arr[i];
+            frontSum[i+1] = sum;
+        }
         
         sum = 0;
-        for (int i=0; i<n; i++) 
-        {
-            sum += cardPoints[i];
-            cummulativeSumFromFront[i+1] = sum;
-        }
-        sum = 0;
-        for (int i=n-1; i>=0; i--) 
-        {
-            sum += cardPoints[i];
-            cummulativeSumFromBehind[i] = sum;
+        for(int i = n-1; i >= 0; i--) {
+            sum += arr[i];
+            rearSum[i] = sum; 
         }
         
-        reverse(cummulativeSumFromBehind.begin(), cummulativeSumFromBehind.end());
+        reverse(rearSum.begin(), rearSum.end());
         
-        int answer = 0;
-        for(int i=0; i<=k; i++) 
-        {      
-            answer = max(answer, 
-                           cummulativeSumFromFront[i] + cummulativeSumFromBehind[k-i]); 
+        int result = 0;
+        for(int i = 0; i <= k; i++) {
+            result = max(result, frontSum[i] + rearSum[k-i]); 
         }
-        return answer;
+        
+        return result;
     }
 };
