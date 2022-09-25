@@ -3,7 +3,7 @@ class Solution
     public:
         int longestConsecutive(vector<int> &nums)
         {
-            // TLE
+            // TLE with ordered map
             unordered_map<int,int> hash;
             for (auto itr: nums)
             {
