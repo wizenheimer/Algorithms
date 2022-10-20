@@ -1,21 +1,33 @@
-class Solution {
-public:
-    int findMin(vector<int>& nums) {
-        int left = 0, right = nums.size() - 1, minVal = INT_MAX;
-        
-        while(left <= right) {                           
-            int mid = left + (right - left)/2;
-                       
-            minVal = min(minVal, nums[mid]);
+class Solution
+{
+    public:
+        int findMin(vector<int> &nums)
+        {
+            int low = 0, high = nums.size() - 1;
+
+            if (low == high) return nums[0];
             
-            if(nums[mid] > nums[right]) {
-                // right half is unsorted
-                left = mid + 1;
-            } else {
-                // left half is unsorted
-                right = mid - 1;                
+            if(nums[low] < nums[high]) return nums[0];
+
+            while (low <= high)
+            {
+                int mid = low + (high - low) / 2;
+
+                if (mid > 0 && nums[mid] < nums[mid - 1])
+                {
+                    return nums[mid];
+                }
+                
+                if (nums[mid] > nums[high])
+                {
+                    low = mid + 1;
+                }
+                else
+                {
+                    high = mid - 1;
+                }
             }
+            
+            return nums[low];
         }
-        return minVal;
-    }
 };
