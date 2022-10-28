@@ -23,15 +23,18 @@ class Solution
            	//                 result += ch;
            	//             }
            	//             return result;
-
+            //          attempt 2 - 14 ms bruh
+            //          attempt 3 - 0 ms
             std::sort(strs.begin(), strs.end());
 
-            string foo = strs[0];
-            string bar = strs[strs.size() - 1];
+            string foo = strs.front();
+            string bar = strs.back();
 
             string result = "";
-
-            for (int i = 0; i < foo.size(); i++)
+            
+            int size = foo.size();
+            
+            for (int i = 0; i < size; i++)
             {
                 if (foo[i] == bar[i]) 
                     result += foo[i];
