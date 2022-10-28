@@ -12,6 +12,7 @@ class Solution
 
                 if (missingCount < k)
                 {
+                    result = mid;
                     // re-adjust the low pointer
                     low = mid + 1;
                 }
@@ -21,6 +22,7 @@ class Solution
                     high = mid - 1;
                 }
             }
-            return low + k;
+            // return low + k;
+            return result + k + 1;
         }
 };
