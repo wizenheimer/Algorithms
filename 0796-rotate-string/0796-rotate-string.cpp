@@ -1,12 +1,14 @@
 class Solution {
 public:
-    bool rotateString(string str, string goal) {
-        if(str.size() != goal.size()) return false;
+    bool rotateString(string source, string target) {
         
-        string merged = str + str;
-        if(merged.find(goal) == string::npos) 
+        if(source.size() != target.size()) 
             return false;
-        else 
+        
+        string str = source + source;
+        if(str.find(target) != string::npos) 
             return true;
+        else 
+            return false;
     }
 };
