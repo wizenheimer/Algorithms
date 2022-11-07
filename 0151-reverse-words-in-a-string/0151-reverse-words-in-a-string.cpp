@@ -1,25 +1,38 @@
-class Solution {
-public:
-    string reverseWords(string s) {
-        // reverse the entire string
-        reverse(s.begin(), s.end());
-        int storeIndex = 0;
-        for (int i = 0; i < s.size(); i++)
+class Solution
+{
+    public:
+        string reverseWords(string s)
         {
-            if (s[i] != ' ')
+            if (s.size() == 0) 
+                return s;
+            
+            stack<string> stack;
+            
+            string result;
+            
+            for (int i = 0; i < s.size(); i++)
             {
-                if (storeIndex != 0) s[storeIndex++] = ' ';
-                int j = i;
-                while (j < s.size() && s[j] != ' ')
+                string word;
+                
+                if (s[i] == ' ') 
+                    continue;
+                
+                while (i < s.size() && s[i] != ' ')
                 {
-                    s[storeIndex++] = s[j++];
+                    word += s[i];
+                    i++;
                 }
-               	// reverse the substring when there's a whitespace
-                reverse(s.begin() + storeIndex - (j - i), s.begin() + storeIndex);
-                i = j;
+                
+                stack.push(word);
             }
+            while (!stack.empty())
+            {
+                result += stack.top();
+                stack.pop();
+                
+                if (!stack.empty()) 
+                    result += " ";
+            }
+            return result;
         }
-        s.erase(s.begin() + storeIndex, s.end());
-        return s;
-    }
 };
