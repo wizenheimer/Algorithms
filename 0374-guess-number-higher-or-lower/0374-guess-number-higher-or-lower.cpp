@@ -12,12 +12,13 @@ class Solution
     public:
         int guessNumber(int n)
         {
-            int low = 1;
-            int high = n;
+            int low = 1, high = n;
+            
             while (low <= high)
             {
-                int mid = low + (high - low) / 2;
+                int mid = low + ((high - low) >> 1);
                 int flag = guess(mid);
+                
                 if (flag == 0)
                     return mid;
                 else if (flag > 0)
@@ -25,6 +26,7 @@ class Solution
                 else
                     high = mid - 1;
             }
+            
             return -1;
         }
 };
