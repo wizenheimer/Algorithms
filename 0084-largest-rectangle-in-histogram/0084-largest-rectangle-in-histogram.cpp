@@ -1,10 +1,11 @@
 class Solution {
 private:
-    vector<int> createNSL(vector<int> &heights) {
+    int SIZE;
+    vector<int> createNSL(vector<int> &heights) {        
         stack<pair<int, int>> Stack;
-        vector<int> result(heights.size(), 0);
+        vector<int> result(SIZE, 0);
         
-        for(int i = 0; i < heights.size(); i++) {
+        for(int i = 0; i < SIZE; i++) {
             while(!Stack.empty() && Stack.top().first >= heights[i])
                 Stack.pop();
             if(!Stack.empty())
@@ -17,16 +18,17 @@ private:
         return result;
     }
     vector<int> createNSR(vector<int> &heights) {
+        // int SIZE = heights.size();
         stack<pair<int, int>> Stack;
-        vector<int> result(heights.size(), 0);
+        vector<int> result(SIZE, 0);
         
-        for(int i = heights.size() - 1; i >= 0; i--) {
+        for(int i = SIZE - 1; i >= 0; i--) {
             while(!Stack.empty() && Stack.top().first >= heights[i])
                 Stack.pop();
             if(!Stack.empty())
                 result[i] = Stack.top().second;
             else
-                result[i] = heights.size();
+                result[i] = SIZE;
             Stack.push({heights[i], i});
         }
         
@@ -34,19 +36,16 @@ private:
     }
 public:
     int largestRectangleArea(vector<int>& heights) {
+        SIZE = heights.size();
         vector<int> NSR = createNSR(heights);
         vector<int> NSL = createNSL(heights);
         vector<int> width;
-        
-        for(int i = 0; i < heights.size(); i++)
-        {
-            width.push_back(NSR[i] - NSL[i] - 1);
-        }
+        // int SIZE = heights.size();
         
         int maxV = INT_MIN;
-        for(int i = 0; i < heights.size(); i++)
+        for(int i = 0; i < SIZE; i++)
         {
-            maxV = max(maxV, width[i]*heights[i]);
+            maxV = max(maxV, (NSR[i] - NSL[i] - 1)*heights[i]);
         }
         
         return maxV;        
