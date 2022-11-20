@@ -51,12 +51,14 @@ class Solution
     public:
         int maximalRectangle(vector<vector < char>> &matrix)
         {
-
-            vector<int> arr(matrix[0].size(), 0);
+            int row = matrix.size();
+            int col = matrix[0].size();
+            
+            vector<int> arr(col, 0);
             int result = INT_MIN;
-            for (int i = 0; i < matrix.size(); i++)
+            for (int i = 0; i < row; i++)
             {
-                for (int j = 0; j < matrix[0].size(); j++)
+                for (int j = 0; j < col; j++)
                 {
                     if (matrix[i][j] == '1')
                         arr[j] += 1;
