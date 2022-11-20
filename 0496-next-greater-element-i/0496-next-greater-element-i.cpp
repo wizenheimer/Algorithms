@@ -29,10 +29,10 @@ class Solution
                     Stack.push(num);
                 }
             }
-            vector<int> result(nums1.size(), -1);
+            vector<int> result;
             for (int i = 0; i < nums1.size(); i++)
             {
-                result[i] = hash[nums1[i]];
+                result.push_back(hash[nums1[i]]);
             }
             return result;
         }
