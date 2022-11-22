@@ -1,32 +1,41 @@
-class Solution {
-public:
-    int calculate(string s) {
-        stack <int> nums, ops;
-        long num = 0;
-        int rst = 0;
-        int sign = 1;
-        for (char c : s) { 
-            if (isdigit(c)) {
-                num = num * 10 + c - '0';
-            }
-            else {
-                rst += sign * num;
-                num = 0;
-                if (c == '+') sign = 1;
-                if (c == '-') sign = -1;
-                if (c == '(') {
-                    nums.push(rst);
-                    ops.push(sign);
-                    rst = 0;
+class Solution
+{
+    public:
+        int calculate(string str)
+        {
+            stack<pair<int, int>> Stack;
+            int result = 0, sign = 1;
+            for (int i = 0; i < str.size(); i++)
+            {
+                if (isdigit(str[i]))
+                {
+                    long long num = 0;
+                    while (isdigit(str[i]) && i < str.size())
+                    {
+                        num = (num *10) + (str[i] - '0');
+                        i++;
+                    }
+                    i--;
+                    result += (num *sign);
                     sign = 1;
                 }
-                if (c == ')' && ops.size()) {
-                    rst = ops.top() * rst + nums.top();
-                    ops.pop(); nums.pop();
+                else if (str[i] == '(')
+                {
+                    Stack.push({ result,
+                        sign });
+                    result = 0;
+                    sign = 1;
+                }
+                else if (str[i] == ')')
+                {
+                    result = Stack.top().first + (Stack.top().second *result);
+                    Stack.pop();
+                }
+                else if (str[i] == '-')
+                {
+                    sign = -1;
                 }
             }
+            return result;
         }
-        rst += sign * num;
-        return rst;
-    }
 };
